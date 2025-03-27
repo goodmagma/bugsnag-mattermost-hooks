@@ -14,7 +14,10 @@ This small service allow to proxy the Bugsnag Webhook integration for posting ev
 
 2. Start your self-hosted service using:
 
-`docker-compose up --build`
+   ```
+   docker build --pull --no-cache -t goodmagma/bugsnag-mattermost-hooks:latest .
+   docker-compose up
+   ```
 
 3. Publish the service on a public domain like `https://mattermost-hooks.example.com`
 
@@ -27,4 +30,4 @@ This small service allow to proxy the Bugsnag Webhook integration for posting ev
 5. Fill the Webhook URL with https://service-url/hooks/hook-id (eg: https://mattermost-hooks.example.com/hooks/q79r5di8UjyfjpDbw3e9U4em3s)
 6. Hit TEST button in order to test it
 
-![Example Notification](./assets/bugsnag-webhook.png "This is an example image")
+![Configure Webhook](./assets/bugsnag-webhook.png "This is an example webhook configuration on Bugsnag")

@@ -1,8 +1,9 @@
 services:
   mattermost_hooks:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: goodmagma/bugsnag-mattermost-hooks:latest
+    #build:
+    #  context: .
+    #  dockerfile: Dockerfile
     ports:
       - "5000:5000"
     environment:
