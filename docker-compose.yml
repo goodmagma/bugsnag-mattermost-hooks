@@ -1,5 +1,5 @@
 services:
-  mattermost_hooks:
+  bugsnag-mattermost-hooks:
     image: goodmagma/bugsnag-mattermost-hooks:latest
     #build:
     #  context: .
@@ -8,5 +8,4 @@ services:
       - "5000:5000"
     environment:
       MATTERMOST_URL: https://mattermost.example.com
-    volumes:
-      - .:/app
+

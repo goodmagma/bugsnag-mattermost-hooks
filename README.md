@@ -4,7 +4,7 @@ Bugsnag / Insight Hub does not provide any integration for Mattermost, only Slac
 
 This small service allow to proxy the Bugsnag Webhook integration for posting events on a Mattermost channel.
 
-![Example Notification](./assets/notification.png "This is an example notification on your channel")
+![Example Notification](./assets/mattermost-notification.png "This is an example notification on your channel")
 
 ## Setup
 
