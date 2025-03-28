@@ -7,13 +7,14 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
 def home():
-    return "Bugsnag / Insight Hub Mattermost Hooks proxy"
+    return "Bugsnag / Insight Hub Mattermost Hooks Proxy"
 
 @app.route('/hooks/', defaults={'path': ''}, methods=['POST'])
 @app.route('/hooks/<path:path>', methods=['POST'])
 def handle_exception(path):
     # Get environment variable
     mattermost_url = os.getenv('MATTERMOST_URL')
+    app_debug = os.getenv('APP_DEBUG', False)
 
     # Read body from POST
     input_data = request.get_data(as_text=True)
@@ -66,8 +67,9 @@ def handle_exception(path):
         markdown_message += f"\n\n**Stack trace**:\n{stack_trace}\n[View on Bugsnag]({bugsnag_url})"
 
         # Save message to log file
-        #with open("hooks.log", "a") as log_file:
-        #    log_file.write(markdown_message + "\n\n")
+        if app_debug:
+            with open("hooks.log", "a") as log_file:
+                log_file.write(markdown_message + "\n\n")
 
         # Push message to Mattermost Webhook
         webhook_url = f"{mattermost_url}/hooks/{hook_id}"
