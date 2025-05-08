@@ -44,7 +44,11 @@ def handle_exception(path):
 
         # Format stack trace
         stack_trace = "```\n"
+
         if 'stackTrace' in data['error'] and isinstance(data['error']['stackTrace'], list):
+
+            frame_count = 0
+
             for frame in data['error']['stackTrace']:
                 file = frame.get('file', 'unknown file')
                 line = frame.get('lineNumber', 'unknown line')
@@ -52,9 +56,16 @@ def handle_exception(path):
                 stack_trace += f"{file}:{line} in {method}\n"
 
                 # add code if it's present
-                if 'code' in frame and isinstance(frame['code'], dict):
+                if 'code' in frame and isinstance(frame['code'], dict) and frame_count == 0:
                     for code_line, code in frame['code'].items():
                         stack_trace += f"  {code_line}: {code}\n"
+
+                # print only the first 5 rows of the stack trace
+                if frame_count >= 5:
+                    break
+
+                frame_count += 1
+
         stack_trace += "```\n"
 
         # Create markdown message
